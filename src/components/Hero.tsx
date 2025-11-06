@@ -1,6 +1,6 @@
 import { ArrowRight, Download, Github, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import profilePlaceholder from "@/assets/profile-placeholder.png";
+import profileSubrata from "@/assets/profile-subrata.jpg";
 import heroBg from "@/assets/hero-bg.png";
 
 const Hero = () => {
@@ -73,8 +73,8 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary to-accent rounded-full opacity-75 blur-xl animate-glow" />
               <img
-                src={profilePlaceholder}
-                alt="Subrata Paramanik"
+                src={profileSubrata}
+                alt="Subrata Paramanik - B.Tech CSE Student"
                 className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-primary"
               />
             </div>
