@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,11 +12,34 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you! I'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+    setIsLoading(true);
+
+    try {
+      emailjs.init("oaVBZV3m0SEquAMyd");
+
+      await emailjs.send(
+        "service_bvznopk",
+        "template_8zfhmmp",
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: "Subrata",
+        }
+      );
+
+      toast.success("Thank you! Your message has been sent successfully.");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast.error("Oops! Something went wrong. Please try again or email me directly.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const contactInfo = [
@@ -140,8 +164,8 @@ const Contact = () => {
               />
             </div>
 
-            <Button type="submit" size="lg" className="w-full btn-primary group">
-              Send Message
+            <Button type="submit" size="lg" className="w-full btn-primary group" disabled={isLoading}>
+              {isLoading ? "Sending..." : "Send Message"}
               <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </form>
