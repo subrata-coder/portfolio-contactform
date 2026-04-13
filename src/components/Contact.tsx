@@ -19,7 +19,7 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      emailjs.init("sKQWsow6Cz_yapK3G");
+      emailjs.init("oaVBZV3m0SEquAMyd");
 
       await emailjs.send(
         "service_bvznopk",
